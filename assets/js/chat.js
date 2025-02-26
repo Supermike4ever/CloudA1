@@ -71,7 +71,9 @@ $(document).ready(function () {
 
         if (data.body) {
           reply_message = JSON.parse(data.body)["botReply"]
-          insertResponseMessage(reply_message);
+          for (const msg of reply_message) {
+            insertResponseMessage(msg);
+          }
         } else {
           insertResponseMessage(
             "Oops, something went wrong. Please try again."
