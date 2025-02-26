@@ -67,7 +67,6 @@ $(document).ready(function () {
       .then((response) => {
         console.log(response);
         var data = response.data;
-        console.log("response data", data);
         let reply_message;
 
         if (data.body) {
