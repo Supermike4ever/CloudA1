@@ -70,11 +70,7 @@ $(document).ready(function () {
         let reply_message;
 
         if (data.body) {
-          JSON.parse(data.body, function (key, value) {
-            if (key === "botReply") {
-              reply_message = value;
-            }
-          });
+          reply_message = JSON.parse(data.body)["botReply"]
           insertResponseMessage(reply_message);
         } else {
           insertResponseMessage(
