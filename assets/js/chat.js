@@ -15,6 +15,23 @@ $(document).ready(function () {
   });
 
   function updateScrollbar() {
+    // Force layout recalculation
+    $messages.find(".mCSB_container").css("height", "auto");
+
+    // Get actual content height by measuring all children
+    var totalHeight = 0;
+    $messages
+      .find(".mCSB_container")
+      .children()
+      .each(function () {
+        totalHeight += $(this).outerHeight(true);
+      });
+
+    // Set explicit height if needed
+    if (totalHeight > 0 && $messages.find(".mCSB_container").height() === 0) {
+      $messages.find(".mCSB_container").height(totalHeight);
+    }
+    
     $messages
       .mCustomScrollbar("update")
       .mCustomScrollbar("scrollTo", "bottom", {
@@ -70,7 +87,7 @@ $(document).ready(function () {
         let reply_message;
 
         if (data.body) {
-          reply_message = JSON.parse(data.body)["botReply"]
+          reply_message = JSON.parse(data.body)["botReply"];
           for (const msg of reply_message) {
             insertResponseMessage(msg);
           }
